@@ -1,0 +1,62 @@
+version: "3"
+
+services:
+  api:
+    build: .
+    container_name: express-api
+    depends_on:
+      - mysql
+      - redis-server
+    ports:
+      - 80
+    networks:
+      - backend
+    environment:
+      - MYSQL_HOST=api-db
+      - MYSQL_USER=admin
+      - MYSQL_PASS=secret
+      - MYSQL_DB=my_db
+    volumes:
+      - ./:/usr/src/app
+      - static_files:/usr/src/app/docs
+      - /usr/src/app/node_modules/
+    command: "npm run dev"
+
+  mysql:
+    image: mysql:8.0
+    container_name: api-db
+    networks:
+      - backend
+    volumes:
+      - mysqlvol:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=my_db
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=secret
+    ports:
+      - 3310:3306
+
+  redis-server:
+    image: "redis"
+    container_name: api-redis
+    networks:
+      - backend
+
+  nginx:
+    build: ./nginx
+    container_name: api-nginx
+    ports:
+      - 5000:80
+    depends_on:
+      - api
+    networks:
+      - backend
+
+networks:
+  backend:
+
+volumes:
+  apivol:
+  mysqlvol:
+  static_files:
