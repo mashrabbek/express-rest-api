@@ -53,19 +53,6 @@ async function shutdown(e = null) {
 }
 module.exports.shutdown = shutdown;
 
-function testServer() {
-  try {
-    server = http.createServer(app);
-    server.listen(process.env.PORT);
-
-    return server;
-  } catch (err) {
-    console.log({ err });
-    return;
-  }
-}
-module.exports.testServer = testServer;
-
 process.on("SIGTERM", () => {
   debug("Received SIGTERM");
   shutdown();

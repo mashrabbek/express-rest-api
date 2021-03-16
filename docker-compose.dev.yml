@@ -3,32 +3,33 @@ version: "3"
 services:
   api:
     build: .
-    container_name: express-api
+    container_name: express_test
     depends_on:
       - mysql
-      - redis-server
+      - redis
     ports:
       - 80
     networks:
       - backend
     environment:
-      - MYSQL_HOST=api-db
+      - MYSQL_HOST=mysql_test
       - MYSQL_USER=admin
       - MYSQL_PASS=secret
       - MYSQL_DB=my_db
+      - REDIS_SERVER=redis
     volumes:
       - ./:/usr/src/app
-      - static_files:/usr/src/app/docs
+      - static_test_files:/usr/src/app/docs
       - /usr/src/app/node_modules/
     command: "npm run dev"
 
   mysql:
     image: mysql:8.0
-    container_name: api-db
+    container_name: mysql_test
     networks:
       - backend
     volumes:
-      - mysqlvol:/var/lib/mysql
+      - mysql_test_vol:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=my_db
@@ -37,17 +38,17 @@ services:
     ports:
       - 3310:3306
 
-  redis-server:
+  redis:
     image: "redis"
-    container_name: api-redis
+    container_name: redis_test
     networks:
       - backend
 
   nginx:
     build: ./nginx
-    container_name: api-nginx
+    container_name: nginx_test
     ports:
-      - 5000:80
+      - 5001:80
     depends_on:
       - api
     networks:
@@ -57,6 +58,6 @@ networks:
   backend:
 
 volumes:
-  apivol:
-  mysqlvol:
-  static_files:
+  api_test_vol:
+  mysql_test_vol:
+  static_test_files:

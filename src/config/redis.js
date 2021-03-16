@@ -11,7 +11,7 @@ class Redis {
     else {
       this.client = redis.createClient({
         post: this.port,
-        host: "redis-server",
+        host: process.env.REDIS_SERVER,
         retry_strategy: function (options) {
           if (options.error && options.error.code === "ECONNREFUSED") {
             // End reconnecting on a specific error and flush all commands with

@@ -1,7 +1,5 @@
 require("module-alias/register");
-require("@/config/dotenv");
-// run redis server connection check
-require("@/config/redis");
+require("@/config/index");
 
 let debug = require("debug")("ins:index");
 const webServer = require("@/services/web-server");
