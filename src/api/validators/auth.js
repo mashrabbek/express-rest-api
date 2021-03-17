@@ -19,7 +19,7 @@ exports.validate = (method) => {
     }
     case "refreshToken": {
       return [
-        body("refreshToken", "Field not exist")
+        body("accessToken", "Field not exist")
           .exists()
           .trim()
           .notEmpty()
@@ -28,7 +28,7 @@ exports.validate = (method) => {
     }
     case "deleteToken": {
       return [
-        body("refreshToken", "Field not exist")
+        body("accessToken", "Field not exist")
           .exists()
           .trim()
           .notEmpty()

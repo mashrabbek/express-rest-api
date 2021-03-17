@@ -1,18 +1,7 @@
-require("module-alias/register");
-require("@/config/index");
-
-const chai = require("chai");
-const chaiHttp = require("chai-http");
-chai.use(chaiHttp);
-
-const server = require("@/app");
-const should = chai.should();
-const expect = chai.expect;
+const { chai, server, should, expect, assert } = require("./helper");
 
 describe("Index Api", () => {
-  before(function () {
-    console.log("before. index api");
-  });
+  before(function () {});
 
   after(function () {
     console.log("after. index api");

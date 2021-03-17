@@ -133,11 +133,11 @@ exports.deleteToken = async (req, res) => {
     debug({ delToken });
 
     if (delToken == 1) {
-      return res.send({ status: -1, message: "Deleted" });
+      return res.send({ status: 1, message: "Deleted" });
     } else {
       return res.send({ status: 1, message: "no val to delete" });
     }
   } catch (error) {
-    return res.status(500).send(String(error));
+    return res.status(500).send({ status: -1, message: String(error) });
   }
 };
