@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const helmet = require("helmet");
+const loginfo = require("@/middleware/loginfo");
 
 const errorHandlers = require("@/helpers/errors/index");
 const swaggerDocs = require("@/helpers/swagger/index");
@@ -22,7 +23,14 @@ app.use(
 );
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(helmet());
-app.use(morgan("dev"));
+
+// logger in request
+app.use(loginfo);
+
+// morgan console logger in dev mode
+if (process.env.NODE_ENV == "development") {
+  app.use(morgan("dev"));
+}
 
 //initializing endpoints
 endpoints(app);

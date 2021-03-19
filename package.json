@@ -24,6 +24,7 @@
     "helmet": "^4.4.1",
     "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
+    "moment": "^2.29.1",
     "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
     "passport": "^0.4.1",
@@ -31,7 +32,8 @@
     "redis": "^3.0.2",
     "sequelize": "^6.5.1",
     "swagger-jsdoc": "^5.0.0",
-    "swagger-ui-express": "^4.0.7"
+    "swagger-ui-express": "^4.0.7",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "chai": "^4.3.4",

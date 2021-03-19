@@ -1,6 +1,6 @@
 const http = require("http");
-let debug = require("debug")("ins:webserver");
 
+let debug = require("debug")("ins:webserver");
 const app = require("@/app");
 
 let server;
